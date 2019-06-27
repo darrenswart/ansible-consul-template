@@ -87,7 +87,9 @@ vault {
   ssl {
     enabled = {{ consul_template_vault_ssl.enabled|default(true)|bool|lower }}
     verify = {{ consul_template_vault_ssl.verify|default(false)|bool|lower }}
+{% if consul_template_vault_ssl.cert|default(false) %}
     cert = "{{ consul_template_vault_ssl.cert }}"
+{% endif %}
 {% if consul_template_vault_ssl.key|default(false) %}
     key = "{{ consul_template_vault_ssl.key }}"
 {% endif %}
