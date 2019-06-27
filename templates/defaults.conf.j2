@@ -40,7 +40,7 @@ reload_signal = "{{ consul_template_reload_signal|default('SIGHUP') }}"
 
 // WARN: dump_signal flagged as invalid key by v0.18.0 but features in documentation
 //dump_signal = "{{ consul_template_dump_signal|default('SIGQUIT') }}"
-kill_signal = "{{ consul_template_kill_signal|default('SIGINT') }}"
+kill_signal = "{{ consul_template_kill_signal|default('SIGTERM') }}"
 
 {% if consul_template_exec|default(false) %}
 // WARN: env flagged as invalid key by v0.18.0 but features in documentation
