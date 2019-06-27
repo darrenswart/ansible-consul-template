@@ -7,9 +7,9 @@
 - set_fact: tmplcfg={{ consul_template_template.source.split('/')[-1]|replace('.ctmpl', '') }}
 - debug: var=tmplcfg
 
-- name: Fail if consul-template template file does not exist
-  fail: msg="CRITICAL - template file to render is missing"
-  when: not t.stat.exists
+- name: Fail if consul-template template file does not exist OR contents was not provided
+  fail: msg="CRITICAL - template file to render is missing AND contents was not provided"
+  when: (not t.stat.exists) and ()
 
 - name: Render consul-template template file
   template:
