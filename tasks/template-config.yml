@@ -4,12 +4,12 @@
   stat: path="{{ consul_template_template.source }}" 
   register: t
 
-- set_fact: tmplcfg={{ consul_template_template.source.split('/')[-1]|replace('.ctmpl', '') }}
+- set_fact: tmplcfg={{ consul_template_template.source.split('/')[-1] | replace('.ctmpl', '') }}
 - debug: var=tmplcfg
 
 - name: Fail if consul-template template file does not exist OR contents was not provided
   fail: msg="CRITICAL - template file to render is missing AND contents was not provided"
-  when: (not t.stat.exists) and ()
+  when: (not t.stat.exists) and (consul_template_template.contents is not defined)
 
 - name: Render consul-template template file
   template:
