@@ -1,9 +1,10 @@
 template {
-  source = "{{ consul_template_template.source }}"
   destination = "{{ consul_template_template.destination }}"
 
 {% if consul_template_template.contents|default(false) %}
   contents = "{{ consul_template_template.contents }}"
+{% else -%}
+  source = "{{ consul_template_template.source }}"
 {% endif -%}
 
 {% if consul_template_template.command|default(false) %}
