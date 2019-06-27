@@ -26,7 +26,7 @@ consul_template_consul_retry:
 consul_template_consul_ssl: {}        # See example below
 consul_template_reload_signal: SIGHUP
 consul_template_dump_signal: SIGQUIT
-consul_template_kill_signal: SIGINT
+consul_template_kill_signal: SIGTERM
 consul_template_env: {}
 consul_template_max_stale: "1m"
 consul_template_log_level: "warn"     # debug, info, warn, err
