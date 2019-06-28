@@ -24,7 +24,7 @@
 
 - name: Copy vault ssl certificate
   copy:
-    src: "{{ local_ca_cert }}"
+    src: "{{ consul_template_vault_ssl.local_ca_cert }}"
     dest: "{{ consul_template_work_dir }}/vault_cert.pem"
   when: consul_template_vault_ssl.local_ca_cert
 
