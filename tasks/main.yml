@@ -24,13 +24,9 @@
 
 - name: Copy vault ssl certificate
   copy:
-    src: "{{ consul_template_vault_ssl.local_ca_cert }}"
-    dest: "{{ consul_template_work_dir }}/vault_cert.pem"
-  when: consul_template_vault_ssl.local_ca_cert
-
-- name: Set ca_cert variable to be used in configuration file
-  set_fact: consul_template_vault_ssl.ca_cert=local_ca_cert.split('/')[-1]
-  when: consul_template_vault_ssl.local_ca_cert
+    src: "{{ consul_template_vault_ssl.ca_cert.split('/')[-1] }}"
+    dest: "{{ consul_template_work_dir }}/{{ consul_template_vault_ssl.ca_cert.split('/')[-1] }}"
+  when: consul_template_vault_ssl.ca_cert
 
 - name: Ensure consul-template bin directory exists
   file: dest={{ consul_template_bin_dir }} mode=0755 state=directory
