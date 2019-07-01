@@ -29,9 +29,7 @@ consul {
 {% if consul_template_consul_ssl.key|default(false) %}
     key = "{{ consul_template_consul_ssl.key }}"
 {% endif %}
-{% if consul_template_vault_ssl.ca_cert|length %}
-    ca_cert = "{{ consul_template_work_dir ~ '/' ~ (consul_template_vault_ssl.ca_cert.split('/')[-1]) }}"
-{% endif %}
+    ca_cert = "{{ consul_template_consul_ssl.ca_cert|default('') }}"
     ca_path = "{{ consul_template_consul_ssl.ca_path|default('') }}"
     server_name = "{{ consul_template_consul_ssl.server_name|default('my-server.com') }}"
   }
