@@ -93,6 +93,7 @@
 
 - name: Start consul-template
   service: name=consul-template enabled=yes state=started
+  when: not consul_template_do_not_start_immediately
 
 - name: consul-template template create
   include_tasks: template-config.yml
