@@ -91,8 +91,15 @@
   command: systemctl daemon-reload
   when: systemd|changed
 
+- name: Enable consul-template service
+  service: 
+    name: consul-template
+    enabled: yes
+
 - name: Start consul-template
-  service: name=consul-template enabled=yes state=started
+  service: 
+    name: consul-template
+    state: started
   when: not consul_template_do_not_start_immediately
 
 - name: consul-template template create
