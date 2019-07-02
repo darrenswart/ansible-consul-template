@@ -4,7 +4,7 @@ template {
 {% if consul_template_template.contents|default(false) %}
   contents = "{{ consul_template_template.contents }}"
 {% else -%}
-  source = "{{ consul_template_template.source }}"
+  source = "{{ consul_template_work_dir }}/{{ consul_template_template.source.split('/')[-1] }}"
 {% endif -%}
 
 {% if consul_template_template.command|default(false) %}
