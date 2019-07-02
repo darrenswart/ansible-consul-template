@@ -1,11 +1,11 @@
 ---
 
 - name: Ensure that consul-template template file to render is present
-  stat: path="{{ consul_template_template.source }}" 
+  stat: path="{{ consul_template_work_dir }}/{{ consul_template_template.source.split('/')[-1] }}" 
   register: t
 
-- set_fact: tmplcfg={{ consul_template_template.source.split('/')[-1] | replace('.ctmpl', '') }}
-- debug: var=tmplcfg
+- set_fact: tplcfg={{ consul_template_template.source.split('/')[-1] | replace('.tpl', '') }}
+- debug: var=tplcfg
 
 - name: Fail if consul-template template file does not exist OR contents was not provided
   fail: msg="CRITICAL - template file to render is missing AND contents was not provided"
@@ -14,7 +14,7 @@
 - name: Render consul-template template file
   template:
     src:   template.conf.j2
-    dest:  "{{ consul_template_conf_dir }}/template-{{ tmplcfg }}"
+    dest:  "{{ consul_template_conf_dir }}/template-{{ tplcfg }}"
     owner: root
     group: root
     mode:  0644
