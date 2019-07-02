@@ -72,8 +72,8 @@ wait {
 vault {
   address = "{{ consul_template_vault_address }}"
   token = "{{ consul_template_vault_token }}"
-  unwrap_token = {{ consult_template_vault_unwrap_token|default(true)|bool|lower }}
-  renew_token = {{ consult_template_vault_renew_token|default(true)|bool|lower }}
+  unwrap_token = {{ consul_template_vault_unwrap_token|default(true)|bool|lower }}
+  renew_token = {{ consul_template_vault_renew_token|default(true)|bool|lower }}
   retry {
     enabled = {{ consul_template_vault_retry.enabled|default(true)|bool|lower }}
     attempts = {{ consul_template_vault_retry.attempts|default(5) }}
