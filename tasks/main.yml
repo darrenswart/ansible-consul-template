@@ -28,6 +28,12 @@
     dest: "{{ consul_template_work_dir }}/{{ consul_template_vault_ssl.ca_cert.split('/')[-1] }}"
   when: consul_template_vault_ssl.ca_cert
 
+- name: Copy template source
+  copy:
+    src: "{{ consul_template_template.source }}"
+    dest: "{{ consul_template_work_dir }}/{{ consul_template_template.source.split('/')[-1] }}"
+  when: consul_template_template.source
+  
 - name: Ensure consul-template bin directory exists
   file: dest={{ consul_template_bin_dir }} mode=0755 state=directory
 
