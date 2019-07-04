@@ -1,34 +1,34 @@
 template {
-  destination = "{{ consul_template_template.destination }}"
+  destination = "{{ item.destination }}"
 
-{% if consul_template_template.contents|default(false) %}
-  contents = "{{ consul_template_template.contents }}"
+{% if item.contents|default(false) %}
+  contents = "{{ item.contents }}"
 {% else -%}
-  source = "{{ consul_template_work_dir }}/{{ consul_template_template.source.split('/')[-1] }}"
+  source = "{{ consul_template_work_dir }}/{{ item.source.split('/')[-1] }}"
 {% endif -%}
 
-{% if consul_template_template.command|default(false) %}
-  command = "{{ consul_template_template.command }}"
+{% if item.command|default(false) %}
+  command = "{{ item.command }}"
 {% endif -%}
 
-{% if consul_template_template.command_timeout|default(false) %}
+{% if item.command_timeout|default(false) %}
   // This is the maximum amount of time to wait for the optional command to
   // return. Default is 30s.
-  command_timeout = "{{ consul_template_template.command_timeout }}"
+  command_timeout = "{{ item.command_timeout }}"
 {% endif %}
-  perms = {{ consul_template_template.perms|default('0644') }}
-  backup = {{ consul_template_template.backup|default(true)|bool|lower }}
-{% if consul_template_template.left_delimiter|default(false) %}
-  left_delimiter  = "{{ consul_template_template.left_delimiter }}"
+  perms = {{ item.perms|default('0644') }}
+  backup = {{ item.backup|default(true)|bool|lower }}
+{% if item.left_delimiter|default(false) %}
+  left_delimiter  = "{{ item.left_delimiter }}"
 {% endif -%}
-{% if consul_template_template.left_delimiter|default(false) %}
-  right_delimiter  = "{{ consul_template_template.right_delimiter }}"
+{% if item.left_delimiter|default(false) %}
+  right_delimiter  = "{{ item.right_delimiter }}"
 {% endif -%}
 
-{% if consul_template_template.wait|default(false) %}
+{% if item.wait|default(false) %}
   wait {
-    min = "{{ consul_template_template.wait.min|default('2s') }}"
-    max = "{{ consul_template_template.wait.max|default('10s') }}"
+    min = "{{ item.wait.min|default('2s') }}"
+    max = "{{ item.wait.max|default('10s') }}"
   }
 {% endif -%}
 }
