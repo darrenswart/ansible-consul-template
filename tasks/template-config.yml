@@ -1,15 +1,15 @@
 ---
 
 - name: Ensure that consul-template template file to render is present
-  stat: path="{{ consul_template_work_dir }}/{{ consul_template_template.source.split('/')[-1] }}" 
+  stat: path="{{ consul_template_work_dir }}/{{ item.source.split('/')[-1] }}" 
   register: t
 
-- set_fact: tplcfg={{ consul_template_template.source.split('/')[-1] | replace('.tpl', '') }}
+- set_fact: tplcfg={{ item.source.split('/')[-1] | replace('.tpl', '') }}
 - debug: var=tplcfg
 
 - name: Fail if consul-template template file does not exist OR contents was not provided
   fail: msg="CRITICAL - template file to render is missing AND contents was not provided"
-  when: (not t.stat.exists) and (consul_template_template.contents is not defined)
+  when: (not t.stat.exists) and (item.contents is not defined)
 
 - name: Render consul-template template file
   template:
