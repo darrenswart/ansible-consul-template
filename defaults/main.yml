@@ -51,7 +51,7 @@ consul_template_vault_retry:
   max_backoff: "1m"
 consul_template_vault_ssl: {}       # See example below
 
-consul_template_template: {}          # See example below
+consul_template_templates: []          # See example below
 
 #########################
 ##  Configuration Example
