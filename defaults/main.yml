@@ -57,16 +57,17 @@ consul_template_templates: []          # See example below
 #########################
 ##  Configuration Example
 ##
-## consul_template_template:
-##   source: "/path/on/disk/to/template.ctmpl"  # mutually exclusive with "contents"
-##   destination: "/path/on/disk/where/template/will/render.txt"
-##   command: "restart service foo"
-##   command_timeout: "60s"
-##   perms: "0600"
-##   backup: true
-##   left_delimiter:  "{{"
-##   right_delimiter: "}}"
-##   wait: { min: "2s", max: "10s" }
+## consul_template_templates:
+##   - source: "/path/on/disk/to/template.tpl"  # mutually exclusive with "contents"
+##     destination: "/path/on/disk/where/template/will/render.txt"
+##     command: "restart service foo"
+##     command_timeout: "60s"
+##     perms: "0600"
+##     copy_method:  # copy or template
+##     backup: true
+##     left_delimiter:  "{{"
+##     right_delimiter: "}}"
+##     wait: { min: "2s", max: "10s" }
 ## 
 ## consul_template_consul_auth:
 ##   enabled: true
