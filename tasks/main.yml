@@ -45,6 +45,7 @@
   shell: >
       {{ consul_template_bin_dir }}/consul-template -version || true
   register: version
+  changed_when: false
 
 - debug: msg="{{ version.stderr }}"
 
