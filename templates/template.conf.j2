@@ -1,6 +1,5 @@
 template {
   destination = "{{ item.destination }}"
-
 {% if item.contents|default(false) %}
   contents = "{{ item.contents }}"
 {% else -%}
