@@ -16,6 +16,7 @@ consul_template_do_not_start_immediately: true
 
 ##########
 ##  Config
+consul_template_consul_enable: true
 consul_template_consul_auth: {}       # See example below
 consul_template_consul_address: '127.0.0.1:8500'
 consul_template_consul_token:

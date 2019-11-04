@@ -1,3 +1,4 @@
+{% if consul_template_consul_enable|default(true) %}
 consul {
 {% if consul_template_consul_auth %}
   auth {
@@ -35,6 +36,7 @@ consul {
   }
 {% endif -%}
 }
+{% endif -%}
 
 reload_signal = "{{ consul_template_reload_signal|default('SIGHUP') }}"
 
