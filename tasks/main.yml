@@ -32,14 +32,14 @@
   copy:
     src: "{{ item.source }}"
     dest: "{{ consul_template_work_dir }}/{{ item.source.split('/')[-1] }}"
-  when: consul_template_templates
+  when: consul_template_templates is defined
   with_items: "{{ consul_template_templates | selectattr ('copy_method', 'undefined') | list }} + {{ consul_template_templates | selectattr ('copy_method', 'defined') | selectattr('copy_method', 'match', '(?i)^copy') | list }}"
   
 - name: Use ansible template module for template sources
   template:
     src: "{{ item.source }}"
     dest: "{{ consul_template_work_dir }}/{{ (item.source.split('/')[-1] | splitext)[0] }}.tpl"
-  when: consul_template_templates
+  when: consul_template_templates is defined
   with_items: "{{ consul_template_templates | selectattr ('copy_method', 'defined') | selectattr('copy_method', 'match', '(?i)^template') | list }}"
 
 - name: Ensure consul-template bin directory exists
