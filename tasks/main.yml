@@ -96,7 +96,7 @@
 
 - name: Reload systemd manager configuration
   command: systemctl daemon-reload
-  when: systemd|changed
+  when: systemd is changed
 
 - name: Enable consul-template service
   service: 
