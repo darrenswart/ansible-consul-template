@@ -1,10 +1,9 @@
 template {
   destination = "{{ item.destination }}"
-
 {% if item.contents|default(false) %}
   contents = "{{ item.contents }}"
 {% else -%}
-  source = "{{ consul_template_work_dir }}/{{ item.source.split('/')[-1] }}"
+  source = "{{ consul_template_work_dir }}/{% if (item.source.split('/')[-1] | splitext)[1] | lower == '.j2' %}{{ (item.source.split('/')[-1] | splitext)[0] }}.tpl{% else %}{{ item.source.split('/')[-1] }}{% endif %}"
 {% endif -%}
 
 {% if item.command|default(false) %}
