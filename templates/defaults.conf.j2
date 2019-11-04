@@ -93,11 +93,15 @@ vault {
 {% if consul_template_vault_ssl.key|default(false) %}
     key = "{{ consul_template_vault_ssl.key }}"
 {% endif %}
-{% if consul_template_vault_ssl.ca_cert|length %}
+{% if consul_template_vault_ssl.ca_cert|default(false) %}
     ca_cert = "{{ consul_template_work_dir ~ '/' ~ (consul_template_vault_ssl.ca_cert.split('/')[-1]) }}"
 {% endif %}
+{% if consul_template_vault_ssl.ca_path|default(false) %}
     ca_path = "{{ consul_template_vault_ssl.ca_path|default('') }}"
+{% endif %}
+{% if consul_template_vault_ssl.server_name|default(false) %}
     server_name = "{{ consul_template_vault_ssl.server_name|default('my-server.com') }}"
+{% endif %}
   }
 {% endif -%}
 
