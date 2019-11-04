@@ -16,7 +16,7 @@ consul {
     enabled = {{ consul_template_consul_retry.enabled|default(true)|bool|lower }}
     attempts = {{ consul_template_consul_retry.attempts|default(5) }}
     backoff = "{{ consul_template_consul_retry.backoff|default('250ms') }}"
-{% if consul_template_version|version_compare('0.18.5', '>=') %}
+{% if consul_template_version is version_compare('0.18.5', '>=') %}
     max_backoff = "{{ consul_template_consul_retry.max_backoff|default('1m') }}"
 {% endif %}
   }
@@ -47,7 +47,7 @@ kill_signal = "{{ consul_template_kill_signal|default('SIGTERM') }}"
 env {
 {% for key,value in consul_template_env.iteritems() %}
 {#- value is BOOLEAN or NUMBER #}
-{% if value|string == 'True' or value|string == 'False' or value is number %}
+{% if value is string == 'True' or value is string == 'False' or value is number %}
   {{ key }} = {{ value|lower }}
 {#- value is STRING #}
 {% elif value is string %}
@@ -78,7 +78,7 @@ vault {
     enabled = {{ consul_template_vault_retry.enabled|default(true)|bool|lower }}
     attempts = {{ consul_template_vault_retry.attempts|default(5) }}
     backoff = "{{ consul_template_vault_retry.backoff|default('250ms') }}"
-{% if consul_template_version|version_compare('0.18.5', '>=') %}
+{% if consul_template_version is version_compare('0.18.5', '>=') %}
     max_backoff = "{{ consul_template_vault_retry.max_backoff|default('1m') }}"
 {% endif %}
   }
