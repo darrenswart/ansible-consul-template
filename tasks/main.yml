@@ -52,6 +52,7 @@
   shell: >
       {{ consul_template_bin_dir }}/consul-template -version || true
   register: version
+  changed_when: false
 
 - debug: msg="{{ version.stderr }}"
 
@@ -103,7 +104,7 @@
 
 - name: Reload systemd manager configuration
   command: systemctl daemon-reload
-  when: systemd|changed
+  when: systemd is changed
 
 - name: Enable consul-template service
   service: 

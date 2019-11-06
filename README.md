@@ -1,31 +1,22 @@
-consul-template
-==============
+# consul-template role
 
-Ansible role to install, configure and run consul-template as a service.
+Ansible role to install, configure and run consul-template as a service.  The role also installs user specified consul-template templates.
 
-> **Breaking Changes**:
->    * Latest version of this role now ONLY supports consul-template v0.18+.
->    * Please use c841ac8641b309b83073d462a42cb3234d1772ab, for support of 
->      consul-template v0.16 and earlier.
+## Requirements
 
+* consul-template version 0.18+
 
 ## Example
 
-### Install and start consul-template as a service, and ADD template configurations
+### Copy templates and install and start consul-template as a service
 
-> **NOTE:**
->    This role expects that ctmpl file to render for a given template config
->    (i.e. value of `consul_template_template.source`) already exist.
->    You **MUST** ensure it exists on the remote host before adding the template
->    configuration. This is because consul-template will error on restart if missing
-
-```
+```yaml
 - hosts: myhost
 
   vars:
     consul_template_version: 0.18.5
     consul_template_consul_address: "<consulhost:consulport>"
-    
+
   roles:
     - role: wunzeco.consul-template
       consul_template_template:
@@ -38,19 +29,18 @@ Ansible role to install, configure and run consul-template as a service.
         destination: "/data/nginx/upstream/jenkins-8080.conf"
 ```
 
-
 ## Testing
 
 To run this role's integration tests
 
-```
+```bash
 kitchen test
 ```
-
 
 ## Dependencies
 
 none
 
 ## Outstanding
-- redirect consul-template logs to file for service started by systemd
+
+* redirect consul-template logs to file for service started by systemd
