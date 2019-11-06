@@ -96,7 +96,7 @@ vault {
     key = "{{ consul_template_vault_ssl.key }}"
 {% endif %}
 {% if consul_template_vault_ssl.ca_cert|default(false) %}
-    ca_cert = "{{ consul_template_work_dir ~ '/' ~ (consul_template_vault_ssl.ca_cert.split('/')[-1]) }}"
+    ca_cert = "{{ consul_template_work_dir ~ '/' ~ (consul_template_vault_ssl.ca_cert | basename) }}"
 {% endif %}
 {% if consul_template_vault_ssl.ca_path|default(false) %}
     ca_path = "{{ consul_template_vault_ssl.ca_path|default('') }}"
