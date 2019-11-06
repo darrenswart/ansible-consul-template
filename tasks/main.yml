@@ -25,7 +25,7 @@
 - name: Copy vault ssl certificate
   copy:
     src: "{{ consul_template_vault_ssl.ca_cert.split('/')[-1] }}"
-    dest: "{{ consul_template_work_dir }}/{{ consul_template_vault_ssl.ca_cert.split('/')[-1] }}"
+    dest: "{{ consul_template_work_dir }}/{{ consul_template_vault_ssl.ca_cert | basename }}"
   when: consul_template_vault_ssl.ca_cert is defined
 
 - name: Copy template sources
